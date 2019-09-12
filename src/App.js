@@ -10,6 +10,7 @@ import RouteParams from "./components/routeParamsComponent";
 import QueryString from "./components/queryStringComponent";
 import NotFound from "./components/nothingToFound";
 import ProgNav from "./components/programaticNavigationComponent";
+import LoginForm from "./components/loginComponent";
 
 class App extends Component {
   state = { valueOfX: "To jest X", valueOfY: "To jest Y" };
@@ -19,6 +20,7 @@ class App extends Component {
         <HomeNavbar />
         <Switch>
           <Route path="/news" component={News} />
+          <Route path="/login" component={LoginForm} />
           <Route path="/blog" component={Blog} />
           <Route
             path="/xy"
@@ -34,6 +36,7 @@ class App extends Component {
           <Route path="/query-string" component={QueryString} />
           <Route path="/not-found" component={NotFound} />
           <Route path="/buttons" component={ProgNav} />
+          <Route path="/login" component={LoginForm} />
 
           <Route path="/" exact component={Home} />
           <Redirect to="/not-found" />
