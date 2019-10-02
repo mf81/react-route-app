@@ -18,9 +18,10 @@ class Form extends Component {
   };
 
   validateProperty = currentTarget => {
-    const obj = { [currentTarget.name]: currentTarget.value };
+    const { name, value } = currentTarget;
+    const obj = { [name]: value };
     const singleSchema = {
-      [currentTarget.name]: this.schema[currentTarget.name]
+      [name]: this.schema[name]
     };
     const { error } = Joi.validate(obj, singleSchema);
     return error ? error.details[0].message : null;
@@ -30,21 +31,21 @@ class Form extends Component {
     e.preventDefault();
 
     const errors = this.validate();
-    console.log(errors);
     this.setState({ errors: errors || {} });
     if (errors) return;
     this.doSubmit();
   };
 
-  handleChange = e => {
+  handleChange = ({ currentTarget }) => {
+    const { name, value } = currentTarget;
     const errors = { ...this.state.errors };
 
-    const errorMessage = this.validateProperty(e.currentTarget);
-    if (errorMessage) errors[e.currentTarget.name] = errorMessage;
-    else delete errors[e.currentTarget.name];
+    const errorMessage = this.validateProperty(currentTarget);
+    if (errorMessage) errors[name] = errorMessage;
+    else delete errors[name];
 
     const data = { ...this.state.data };
-    data[e.currentTarget.name] = e.currentTarget.value;
+    data[name] = value;
     this.setState({ data, errors });
   };
 
@@ -59,12 +60,12 @@ class Form extends Component {
   renderInput(name, label, type = "text", autoFocus) {
     return (
       <Input
-        type={type}
-        label={label}
         name={name}
+        label={label}
+        errors={this.state.errors}
+        type={type}
         onChange={this.handleChange}
         value={this.state[name]}
-        errors={this.state.errors}
         autoFocus={autoFocus}
       />
     );

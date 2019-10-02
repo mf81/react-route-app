@@ -8,10 +8,20 @@ class LoginForm extends Form {
   schema = {
     username: Joi.string()
       .required()
-      .label("Username"),
+      .label("Użytkownik")
+      .error(() => {
+        return {
+          message: "Pole użytkownika nie może być puste..."
+        };
+      }),
     password: Joi.string()
       .required()
-      .label("Password")
+      .label("Hasło")
+      .error(() => {
+        return {
+          message: "Pole hasła nie może być puste..."
+        };
+      })
   };
 
   doSubmit = () => {
@@ -23,7 +33,7 @@ class LoginForm extends Form {
       <div className="container">
         <h1>Logowanie</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("username", "Uzytkownik:", "text", true)}
+          {this.renderInput("username", "Użytkownik:", "text", true)}
           {this.renderInput("password", "Hasło:", "password")}
           {this.renderButton("Zaloguj")}
         </form>
