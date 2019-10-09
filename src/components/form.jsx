@@ -4,7 +4,6 @@ import Input from "./input";
 
 class Form extends Component {
   state = { data: {}, errors: {} };
-
   validate = () => {
     const result = Joi.validate(this.state.data, this.schema, {
       abortEarly: false
@@ -58,6 +57,8 @@ class Form extends Component {
   }
 
   renderInput(name, label, type = "text", autoFocus) {
+    console.log("State", this.state);
+    console.log("Value state", this.state[name]);
     return (
       <Input
         name={name}
@@ -65,7 +66,7 @@ class Form extends Component {
         errors={this.state.errors}
         type={type}
         onChange={this.handleChange}
-        value={this.state[name]}
+        value={this.state.data[name]}
         autoFocus={autoFocus}
       />
     );

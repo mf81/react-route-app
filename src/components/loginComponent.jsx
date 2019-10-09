@@ -3,7 +3,12 @@ import Joi from "joi-browser";
 import Form from "./form";
 
 class LoginForm extends Form {
-  state = { data: { username: "", password: "" }, errors: {} };
+  componentDidMount() {
+    this.setState({
+      data: { username: "Maciek2222 ", password: "fijałkowski" },
+      errors: {}
+    });
+  }
 
   schema = {
     username: Joi.string()
@@ -29,6 +34,7 @@ class LoginForm extends Form {
   };
 
   render() {
+    console.log("Z loginComponent", this.state);
     return (
       <div className="container">
         <h1>Logowanie</h1>
