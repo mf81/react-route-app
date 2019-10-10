@@ -67,6 +67,7 @@ class Form extends Component {
         type={type}
         onChange={this.handleChange}
         value={this.state.data[name]}
+        key={name}
         autoFocus={autoFocus}
       />
     );
